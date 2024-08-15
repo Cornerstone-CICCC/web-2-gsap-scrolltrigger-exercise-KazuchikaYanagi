@@ -9,7 +9,7 @@ let lineOneTl = gsap.timeline({
     end: "bottom center",
     scrub: true,
     pin: true,
-    markers: true,
+    // markers: true,
   },
 });
 
@@ -31,7 +31,7 @@ let lineTwoTl = gsap.timeline({
     end: "bottom center",
     scrub: true,
     pin: true,
-    markers: true,
+    // markers: true,
   },
 });
 
@@ -43,15 +43,6 @@ lineTwoTl
   .to(".line-two span:last-child", { y: "-1rem" })
   .from(".line-two span:last-child", { y: "-1rem" });
 
-document.querySelector(".line-three").insertAdjacentHTML(
-  "afterend",
-  `
-    <div class="bg"></div>
-    `
-);
-
-let bgElement = document.querySelector(".bg");
-
 let lineThreeTl = gsap.timeline({
   scrollTrigger: {
     trigger: ".line-three",
@@ -59,29 +50,12 @@ let lineThreeTl = gsap.timeline({
     end: "bottom center",
     scrub: true,
     pin: true,
-    markers: true,
+    // markers: true,
   },
 });
 
 lineThreeTl
-  .from(".line-three span:first-child", { y: "100vh" })
-  .from(".line-three span:first-child+span", { y: "100vh" })
-  .from(".line-three span:first-child+span+span", { y: "100vh" })
-  .from(".line-three span:first-child+span+span+span", { y: "100vh" })
-  .fromTo(
-    ".bg",
-    { x: "-100vw", backgroundColor: "white" },
-    { x: 0, backgroundColor: "black", duration: 1 },
-    "<"
-  )
+  .from(".line-three span", { y: "100vh", stagger: 0.5 })
+  .to(".line-three", { backgroundPosition: 0 })
   .to(".line-three span", { color: "white", duration: 1 }, "<")
-  .to(".moon", { x: "-5vw", duration: 2 }, ">-0.5")
-  .to(".bg", { x: "100%", duration: 1 }, "<");
-
-// .bg 要素を挿入
-document.querySelector(".line-three").insertAdjacentHTML(
-  "afterend",
-  `
-      <div class="bg"></div>
-    `
-);
+  .from(".moon", { x: "100vw" }, "<");
